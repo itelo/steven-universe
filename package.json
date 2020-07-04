@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/react-hooks": "^3.1.5",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -10,12 +11,19 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "apollo-boost": "^0.4.9",
+    "graphql": "^15.1.0",
+    "graphqurl": "^0.3.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-relay": "^9.1.0",
     "react-scripts": "3.4.1",
+    "relay-runtime": "^9.1.0",
     "typescript": "~3.7.2"
   },
   "scripts": {
+    "schema": "gq https://neat-hagfish-85.hasura.app/v1/graphql -H 'X-Hasura-Admin-Secret: fffmbbdfuiaencghiyitbroyzbkeajjp' --introspect > schema.graphql",
+    "relay": "relay-compiler --src ./src --schema ./schema.graphql --language typescript --extensions js jsx ts tsx",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -35,5 +43,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-relay": "^7.0.8",
+    "@types/relay-runtime": "^9.1.5",
+    "babel-plugin-relay": "^9.1.0",
+    "relay-compiler": "^9.1.0",
+    "relay-compiler-language-typescript": "^12.0.3"
   }
 }
