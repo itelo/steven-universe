@@ -3,16 +3,15 @@ import { useTheme } from '@material-ui/core/styles';
 import styled from "styled-components";
 import logo from "../../assets/logo.png"
 
-const StyledLogo = styled.div`
-  background: url(${logo});
-  width: 386px;
-  height: 164px;
-  background-size: 386px;
+const StyledLogo = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 `;
 
 function Logo() {
   const theme = useTheme()
-  return <StyledLogo theme={theme} />
+  return <StyledLogo src={logo} theme={theme} />
 }
 
 Logo.defaultProps = {}

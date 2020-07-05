@@ -6,9 +6,6 @@ import Logo from "../components/Logo";
 import styled from "styled-components";
 import {
   CircularProgress,
-  Button,
-  Grid,
-  Paper,
   useTheme,
   Theme,
   AppBar,
@@ -67,9 +64,20 @@ const Container = styled.div<{ theme: Theme }>`
   display: grid;
   grid-template-areas:
     ". head ."
-    ". content .";
+    ". content ."
+    ". donate .";
+    
   grid-template-columns: 1fr minmax(auto, 1000px) 1fr;
-  grid-template-rows: 186px 1fr;
+  grid-template-rows: 186px 1fr 100px;
+  }
+
+  ${({theme}) => theme.breakpoints.down('sm')} {
+    grid-template-areas:
+    ". head ."
+    ". content ."
+    ". donate .";
+    grid-template-columns: 0 minmax(auto, 1000px) 0;
+    grid-template-rows: 186px 1fr 100px;
   }
 `;
 
@@ -77,20 +85,8 @@ const Header = styled.div`
   grid-area: head;
 `;
 
-const Nav = styled.div`
-  grid-area: nav;
-  padding: 24px;
-`;
-
 const Content = styled.div`
   grid-area: content;
-  padding-top: 24px;
-  padding-bottom: 24px;
-`;
-
-const StyledButton = styled(Button)`
-  padding-top: 16px;
-  padding-bottom: 16px;
 `;
 
 const App = (props: AppProps) => {
@@ -138,20 +134,13 @@ const App = (props: AppProps) => {
                       .map((season) => (
                         <Tab label={season.name} {...a11yProps(season.id)} />
                       ))}
-
-                    {/* <Tab label="Item Two" {...a11yProps(1)} />
-                    <Tab label="Item Three" {...a11yProps(2)} />
-                    <Tab label="Item Four" {...a11yProps(3)} />
-                    <Tab label="Item Five" {...a11yProps(4)} />
-                    <Tab label="Item Six" {...a11yProps(5)} />
-                    <Tab label="Item Seven" {...a11yProps(6)} /> */}
                   </Tabs>
                 </AppBar>
                 {data?.seasons
                   .sort((a, b) => a.index - b.index)
                   .map((season, index) => (
                     <TabPanel value={value} index={index}>
-                      {seasonSelectedId !== null && (
+                      {seasonSelectedId === season.id && (
                         <EpisodesList seasonId={seasonSelectedId} />
                       )}
                     </TabPanel>
@@ -160,38 +149,6 @@ const App = (props: AppProps) => {
             )}
           </div>
         </Content>
-        {/* <DonatePaypal />
-        <Nav>
-          <Paper>
-            {loading ? (
-              <CircularProgress />
-            ) : (
-              data?.seasons
-                .sort((a, b) => a.index - b.index)
-                .map((season) => (
-                  <div key={season.id}>
-                    <StyledButton
-                      color={seasonSelectedId === season.id ? 'secondary' : 'default'}
-                      onClick={() =>
-                        seasonSelectedId === season.id
-                          ? setSeasonSelectId(null)
-                          : setSeasonSelectId(season.id)
-                      }
-                      // color="primary"
-                      fullWidth
-                    >
-                      {season.name}
-                    </StyledButton>
-                  </div>
-                ))
-            )}
-          </Paper>
-        </Nav>
-        <Content>
-          {seasonSelectedId !== null && (
-            <EpisodesList seasonId={seasonSelectedId} />
-          )}
-        </Content> */}
       </Container>
     </Background>
   );

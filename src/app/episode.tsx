@@ -1,6 +1,9 @@
 import React from "react";
-import { Accordion, AccordionSummary, Typography, AccordionDetails, AccordionActions } from "@material-ui/core";
-import styled from "styled-components";
+import { withStyles } from '@material-ui/core/styles';
+import MuiAccordion from '@material-ui/core/Accordion';
+import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
+import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
 
 type EpisodeProps = {
   url: string;
@@ -8,16 +11,52 @@ type EpisodeProps = {
   index: number;
 };
 
-export const StyledAccordion = styled(Accordion)`
-  max-width: 600px;
-`
+const Accordion = withStyles({
+  root: {
+    border: '1px solid rgba(0, 0, 0, .125)',
+    boxShadow: 'none',
+    '&:not(:last-child)': {
+      borderBottom: 0,
+    },
+    '&:before': {
+      display: 'none',
+    },
+    '&$expanded': {
+      margin: 'auto',
+    },
+  },
+  expanded: {},
+})(MuiAccordion);
+
+const AccordionSummary = withStyles({
+  root: {
+    backgroundColor: 'rgba(0, 0, 0, .03)',
+    borderBottom: '1px solid rgba(0, 0, 0, .125)',
+    marginBottom: -1,
+    minHeight: 56,
+    '&$expanded': {
+      minHeight: 56,
+    },
+  },
+  content: {
+    '&$expanded': {
+      margin: '12px 0',
+    },
+  },
+  expanded: {},
+})(MuiAccordionSummary);
+
+const AccordionDetails = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2),
+  },
+}))(MuiAccordionDetails);
 
 const Episode = (props: EpisodeProps) => {
   const [show, setShow] = React.useState(false);
   return (
-    <StyledAccordion onClick={() => setShow(true)}>
+    <Accordion onClick={() => setShow(true)}>
       <AccordionSummary
-        // expandIcon={<ExpandMoreIcon />}
         aria-controls={props.name}
         id={props.name}
       >
@@ -26,13 +65,7 @@ const Episode = (props: EpisodeProps) => {
       <AccordionDetails>
         {show && <video src={props.url} controls style={{width: '100%'}}  />}
       </AccordionDetails>
-    </StyledAccordion>
-    // <>
-    // </>
-    // <>
-    //   <button onClick={() => setShow(true)}>{props.name}</button>
-    //   
-    // </>
+    </Accordion>
   );
 };
 
