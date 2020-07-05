@@ -14,8 +14,9 @@ import {
   Box,
   Typography,
   Tab,
+  Button,
 } from "@material-ui/core";
-import DonatePaypal from "../components/DonatePaypal";
+import DonateDialog from "../components/DonateDialog";
 
 type AppProps = {};
 
@@ -89,6 +90,10 @@ const Content = styled.div`
   grid-area: content;
 `;
 
+const Donate = styled.div`
+  grid-area: donate;
+`;
+
 const App = (props: AppProps) => {
   const { data, loading } = useSeasonsQuery();
   const [seasonSelectedId, setSeasonSelectId] = React.useState(
@@ -106,6 +111,16 @@ const App = (props: AppProps) => {
     setSeasonSelectId(season!.id);
     setValue(index);
   }
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Background>
@@ -149,6 +164,10 @@ const App = (props: AppProps) => {
             )}
           </div>
         </Content>
+        <Donate>
+          <Button onClick={handleClickOpen} variant="contained" color="secondary">Ajude a manter o site online com uma doação</Button>
+        </Donate>
+        <DonateDialog open={open} onClose={handleClose} />
       </Container>
     </Background>
   );
