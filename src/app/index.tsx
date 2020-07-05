@@ -23,10 +23,18 @@ const Header = styled.div`
 
 const Nav = styled.div`
   grid-area: nav;
+  padding: 24px;
 `;
 
 const Content = styled.div`
   grid-area: content;
+  padding-top: 24px;
+  padding-bottom: 24px;
+`;
+
+const StyledButton = styled(Button)`
+  padding-top: 16px;
+  padding-bottom: 16px;
 `;
 
 const App = (props: AppProps) => {
@@ -52,7 +60,8 @@ const App = (props: AppProps) => {
                 .sort((a, b) => a.index - b.index)
                 .map((season) => (
                   <div key={season.id}>
-                    <Button
+                    <StyledButton
+                      color={seasonSelectedId === season.id ? 'secondary' : 'default'}
                       onClick={() =>
                         seasonSelectedId === season.id
                           ? setSeasonSelectId(null)
@@ -62,7 +71,7 @@ const App = (props: AppProps) => {
                       fullWidth
                     >
                       {season.name}
-                    </Button>
+                    </StyledButton>
                   </div>
                 ))
             )}

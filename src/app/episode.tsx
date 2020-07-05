@@ -5,10 +5,11 @@ import styled from "styled-components";
 type EpisodeProps = {
   url: string;
   name: string;
+  index: number;
 };
 
 export const StyledAccordion = styled(Accordion)`
-  /* max-width: 600px; */
+  max-width: 600px;
 `
 
 const Episode = (props: EpisodeProps) => {
@@ -20,7 +21,7 @@ const Episode = (props: EpisodeProps) => {
         aria-controls={props.name}
         id={props.name}
       >
-        <Typography>{props.name}</Typography>
+        <Typography>{props.index} - {props.name}</Typography>
       </AccordionSummary>
       <AccordionDetails>
         {show && <video src={props.url} controls style={{width: '100%'}}  />}

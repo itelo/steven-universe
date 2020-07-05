@@ -1,10 +1,16 @@
 import React from 'react';
 import { useEpisodesListBySeasonIdQuery } from '../generated/graphql';
 import Episode from './episode';
+import styled from 'styled-components';
  
 type EpisodesListProps = {
   seasonId: string;
 }
+
+const Container = styled.div`
+  max-height: 50vh;
+  overflow-y: scroll;
+`
  
 const EpisodesList = (props: EpisodesListProps) => {
   const { data, loading } = useEpisodesListBySeasonIdQuery({
@@ -16,13 +22,13 @@ const EpisodesList = (props: EpisodesListProps) => {
     {loading ? (
         "loading"
       ) : (
-        <ul>
+        <Container>
           {data?.episodes
             .sort((a, b) => a.index - b.index)
             .map((episode) => (
-              <Episode url={episode.url} name={episode.name} key={episode.id} />
+              <Episode index={episode.index} url={episode.url} name={episode.name} key={episode.id} />
             ))}
-        </ul>
+        </Container>
       )}
   </div>
 }
