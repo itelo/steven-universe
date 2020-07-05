@@ -1,6 +1,7 @@
 import React from "react";
 import { useSeasonsQuery } from "../generated/graphql";
 import EpisodesList from "./episodes";
+import Background from "../components/Background";
 
 type AppProps = {};
 
@@ -9,7 +10,7 @@ const App = (props: AppProps) => {
   const [seasonSelectedId, setSeasonSelectId] = React.useState<null | string>(null);
   
   return (
-    <div>
+    <Background>
       {loading ? (
         "loading"
       ) : (
@@ -24,7 +25,7 @@ const App = (props: AppProps) => {
             ))}
         </ul>
       )}
-    </div>
+    </Background>
   );
 };
 
