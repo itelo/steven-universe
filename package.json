@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/react-components": "^3.1.5",
+    "@apollo/react-hoc": "^3.1.5",
     "@apollo/react-hooks": "^3.1.5",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -14,20 +16,26 @@
     "apollo-boost": "^0.4.9",
     "graphql": "^15.1.0",
     "graphqurl": "^0.3.3",
+    "ramda": "^0.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-relay": "^9.1.0",
     "react-scripts": "3.4.1",
     "relay-runtime": "^9.1.0",
+    "styled-components": "^5.1.1",
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "schema": "gq https://neat-hagfish-85.hasura.app/v1/graphql -H 'X-Hasura-Admin-Secret: fffmbbdfuiaencghiyitbroyzbkeajjp' --introspect > schema.graphql",
+    "schema": "gq https://steven-universe-portuguese.herokuapp.com/v1/graphql --introspect > schema.graphql",
+    "save": "-H 'X-Hasura-Admin-Secret: fffmbbdfuiaencghiyitbroyzbkeajjp'",
     "relay": "relay-compiler --src ./src --schema ./schema.graphql --language typescript --extensions js jsx ts tsx",
+    "generate": "graphql-codegen",
+    "prestart": "yarn generate",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,9 +53,18 @@
     ]
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.16.0",
+    "@graphql-codegen/fragment-matcher": "1.16.0",
+    "@graphql-codegen/introspection": "^1.16.0",
+    "@graphql-codegen/typescript": "^1.16.0",
+    "@graphql-codegen/typescript-document-nodes": "1.16.0",
+    "@graphql-codegen/typescript-graphql-files-modules": "1.16.0",
+    "@graphql-codegen/typescript-operations": "1.16.0",
+    "@graphql-codegen/typescript-react-apollo": "1.16.0",
     "@types/react-relay": "^7.0.8",
     "@types/relay-runtime": "^9.1.5",
     "babel-plugin-relay": "^9.1.0",
+    "change-case": "^4.1.1",
     "relay-compiler": "^9.1.0",
     "relay-compiler-language-typescript": "^12.0.3"
   }

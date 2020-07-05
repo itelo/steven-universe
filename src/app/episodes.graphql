@@ -1,0 +1,9 @@
+query EpisodesListBySeasonId($season_id: uuid) {
+  episodes(where: {season_id: {_eq: $season_id}})  {
+    id
+    name
+    season_id
+    index
+    url
+  }
+}

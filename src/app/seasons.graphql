@@ -1,0 +1,7 @@
+query Seasons {
+  seasons {
+    id
+    index
+    name
+  }
+}
