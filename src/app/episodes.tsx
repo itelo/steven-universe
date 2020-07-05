@@ -20,9 +20,7 @@ const EpisodesList = (props: EpisodesListProps) => {
           {data?.episodes
             .sort((a, b) => a.index - b.index)
             .map((episode) => (
-              <li key={episode.id}>
-                <Episode url={episode.url} name={episode.name} />
-              </li>
+              <Episode url={episode.url} name={episode.name} key={episode.id} />
             ))}
         </ul>
       )}
